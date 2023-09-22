@@ -52,7 +52,7 @@ const Modal: FC<ModalProps> = ({
     e.preventDefault();
 
     const formData = new FormData(e.currentTarget);
-    const newUsername = formData.get("username") as string;
+    const newUsername = formData.get("name") as string;
     const newIncome = formData.get("income") as string;
 
     if (isAdd) {
@@ -61,7 +61,7 @@ const Modal: FC<ModalProps> = ({
         ? JSON.parse(existingUsersJSON)
         : [];
 
-      existingUsers.push({ username: newUsername, income: newIncome });
+      existingUsers.push({ name: newUsername, income: newIncome });
       if (setUsers) {
         setUsers(existingUsers);
       }
@@ -107,7 +107,7 @@ const Modal: FC<ModalProps> = ({
               <Input
                 type="text"
                 label="Username"
-                id="username"
+                id="name"
                 placeholder="John Doe"
                 value={isAdd ? "" : username}
               />

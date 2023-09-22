@@ -15,7 +15,7 @@ const Layout: FC<LayoutProps> = ({ children, isHome }) => {
         <main
           className={`${
             isHome ? "grid grid-cols-4 gap-8" : " "
-          } pt-32 relative  place-content-center place-items-center  w-full flex-1 px-2 text-center`}
+          } h-full pt-32 relative  place-content-start place-items-center  w-full flex-1 px-6 text-center`}
         >
           <Header />
           {children}

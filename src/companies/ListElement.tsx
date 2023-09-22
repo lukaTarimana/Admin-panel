@@ -13,11 +13,13 @@ type Companies = Company[];
 
 interface ListElementProps {
   data: Companies;
+  updateData?: (newData: Companies) => void;
 }
 
-const ListElement: FC<ListElementProps> = ({ data }) => {
+const ListElement: FC<ListElementProps> = ({ data, updateData }) => {
   const [companies, setCompanies] = useState<Companies>(data);
   const [draggedIndex, setDraggedIndex] = useState<number | null>(null);
+  const [expandedIndices, setExpandedIndices] = useState<number[]>([]);
 
   const handleDragStart = (
     e: React.DragEvent<HTMLLIElement>,
@@ -45,22 +47,41 @@ const ListElement: FC<ListElementProps> = ({ data }) => {
 
       setCompanies(updatedCompanies);
       setDraggedIndex(null);
+      if (updateData) {
+        updateData(updatedCompanies);
+      }
     }
   };
 
+  const toggleCompanyExpansion = (index: number) => {
+    setExpandedIndices((prevIndices) =>
+      prevIndices.includes(index)
+        ? prevIndices.filter((i) => i !== index)
+        : [...prevIndices, index]
+    );
+  };
+
   return (
-    <ul className="w-full">
+    <ul className="w-full p-4">
       {companies.map((company, i) => (
         <li
+          key={i}
+          className={`border-2 mt-4 w-full min-h-[100px]`}
           draggable="true"
           onDragStart={(e) => handleDragStart(e, i)}
           onDragEnter={(e) => handleDragEnter(e)}
           onDragOver={(e) => handleDragOver(e)}
           onDrop={(e) => handleDrop(e, i)}
-          key={i}
-          className="border-2 w-full h-14"
         >
-          <h3>{company.name}</h3>
+          <div
+            className="cursor-pointer w-full h-[100px] flex justify-center items-center"
+            onClick={() => toggleCompanyExpansion(i)}
+          >
+            <h3>{company.name}</h3>
+          </div>
+          {expandedIndices.includes(i) && company.products && (
+            <ListElement data={company.products} />
+          )}
         </li>
       ))}
     </ul>

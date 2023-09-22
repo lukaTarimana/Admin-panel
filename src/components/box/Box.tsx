@@ -34,24 +34,39 @@ const Box: FC<BoxProps> = ({ user, id, onDelete, setUsers }) => {
       <div
         className={`w-64 h-80 ${
           isAdd
-            ? "bg-gray-300"
-            : "bg-gradient-to-br from-slate-400 to-darkBlue "
+            ? "bg-gray-300 justify-between"
+            : "justify-end bg-gradient-to-br   from-slate-400 to-darkBlue "
         }
-        rounded-xl shadow-md flex flex-col justify-between items-center p-4
+         bg-cover bg-center bg-no-repeat
+        rounded-xl shadow-md flex flex-col items-center p-4
         `}
       >
         {isAdd ? (
           <h1>Add Box</h1>
         ) : (
-          <>
-            <h3>Income ${income}</h3>
-            <h3>Name {name}</h3>
-          </>
+          <div className="flex flex-col items-start mb-5">
+            <h3>Income: ${income}</h3>
+            <span className="flex">
+              <h3 className="mr-1">Name:</h3>
+              <h3 className="text-ellipsis overflow-hidden max-w-[150px]">
+                {name}
+              </h3>
+            </span>
+          </div>
         )}
-        <button className="bg-blue-500" onClick={toggleModal}>
-          {isAdd ? "Add Box" : "Edit Box"}{" "}
-        </button>
-        {!isAdd && <button onClick={handleDelete}>Delete</button>}
+        <div className="flex gap-4 justify-center w-full">
+          <button
+            className={isAdd ? "bg-green-600" : "bg-blue-500"}
+            onClick={toggleModal}
+          >
+            {isAdd ? "Add Box" : "Edit Box"}{" "}
+          </button>
+          {!isAdd && (
+            <button className="bg-red-700" onClick={handleDelete}>
+              Delete
+            </button>
+          )}
+        </div>
       </div>
       <Modal
         isOpen={isOpen}
