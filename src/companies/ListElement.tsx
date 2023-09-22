@@ -77,7 +77,7 @@ const ListElement: FC<ListElementProps> = ({ data, updateData }) => {
             className="cursor-pointer w-full h-[100px] flex justify-center items-center"
             onClick={() => toggleCompanyExpansion(i)}
           >
-            <h3>{company.name}</h3>
+            <h3 className="text-xl font-sans italic">{company.name}</h3>
           </div>
           {expandedIndices.includes(i) && company.products && (
             <ListElement data={company.products} />

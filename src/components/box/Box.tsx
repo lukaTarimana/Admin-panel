@@ -44,9 +44,9 @@ const Box: FC<BoxProps> = ({ user, id, onDelete, setUsers }) => {
         {isAdd ? (
           <h1>Add Box</h1>
         ) : (
-          <div className="flex flex-col items-start mb-5">
-            <h3>Income: ${income}</h3>
-            <span className="flex">
+          <div className="flex flex-col text-lg items-start mb-5">
+            <h3 className="text-green-500 italic">Income: ${income}</h3>
+            <span className="flex text-violet-200">
               <h3 className="mr-1">Name:</h3>
               <h3 className="text-ellipsis overflow-hidden max-w-[150px]">
                 {name}

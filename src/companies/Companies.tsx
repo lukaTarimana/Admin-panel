@@ -25,7 +25,7 @@ const Companies: FC = () => {
   };
   return (
     <div className="text-slate-950 w-full bg-white h-full overflow-y-auto">
-      <h1 className="font-sans underline">COMPANIES</h1>
+      <h1 className="font-sans">COMPANIES</h1>
       <div className="w-full flex flex-col justify-start items-start">
         <ListElement data={companies} updateData={updateCompanies} />
       </div>
